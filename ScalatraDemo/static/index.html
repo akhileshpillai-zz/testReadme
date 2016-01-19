@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+.bar { fill: steelblue; }
+.bar:hover { fill: brown; }
+.axis { font: 10px sans-serif; }
+.axis path,
+.axis line { fill: none; stroke: #000; shape-rendering: crispEdges; }
+.x.axis path { display: none; }
+</style>
+<head>
+    <title>Mental Health Stream</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="panel panel-info">
+    <!-- Default panel contents -->
+    <div class="panel-heading"><h4>Context around MH related tweets</h4></div>
+</div>
+<div>
+    <!-- Table -->
+    <table class="table">
+        <tr>
+            <td>
+                <div>
+                    <button type="button" class="btn btn-primary navbar-btn" onclick="removeAndUpdate()">Update</button>
+                </div>
+            </td>
+            <td>
+                <div id="d3div">
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+<script src="https://www.jasondavies.com/d3.min.js"></script>
+<script src="https://www.jasondavies.com/wordcloud/cloud.min.js"></script>
+
+<script>
+
+function mywordcloud() {
+
+
+
+var fill = d3.scale.category20();
+
+var data; // a global
+
+
+d3.json("/app/data/data1.json", function(data) {
+  d3.layout.cloud().size([300, 300])
+      .words(data.map(function(d){console.log(d);
+        return {text: d.dataKey, size: 9 + .09 * d.dataValue};
+      }))
+      .rotate(function() { return ~~(Math.random() * 2) * 90; })
+      .font("Impact")
+      .fontSize(function(d) { return d.size; })
+      .on("end", draw)
+      .start();
+
+  function draw(words) {
+    d3.select("#d3div").append("svg")
+        .attr("id","mhsvg")
+        .attr("width", 800)
+        .attr("height", 300)
+      .append("g")
+        .attr("transform", "translate(150,150)")
+      .selectAll("text")
+        .data(words)
+      .enter().append("text")
+        .style("font-size", function(d) { return d.size + "px"; })
+        .style("font-family", "Impact")
+        .style("fill", function(d, i) { return fill(i); })
+        .attr("text-anchor", "middle")
+        .attr("transform", function(d) {
+          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+        })
+        .text(function(d) { return d.text; });
+  }
+});
+
+//var data = [{dataKey:"Hello",dataValue:20},{dataKey:"World",dataValue:10},{dataKey:"Normally",dataValue:25},{dataKey:"You",dataValue:15},{dataKey:"Want",dataValue:30},{dataKey:"More",dataValue:12},{dataKey:"Words",dataValue:8},{dataKey:"But",dataValue:18},{dataKey:"Who",dataValue:22},{dataKey:"Cares",dataValue:27}];
+
+
+
+
+
+
+}
+
+
+function removeAndUpdate() {
+  d3.select("#mhsvg").remove()
+  mywordcloud()
+}
+
+</script>
