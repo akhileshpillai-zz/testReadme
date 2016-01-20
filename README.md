@@ -11,9 +11,9 @@ For example if I hit update at 8:37 the UI will show me results for last 37 mins
 ![UI](/screenshot1.png)
 
 ###Storage
-* HBase stores all the historic data so any further information for example how a particular hashtag trended could be derived from the data in it.
+* HBase stores all the historic data so any further hashtag trending information  could be derived from the data stored in it.
 
-###RUNNING 
+###Running the Data Pipeline
 1. Start the kakfa producer.
   
 ```
