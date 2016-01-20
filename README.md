@@ -1,3 +1,6 @@
+##Mental Health Stream
+Recent Palo Alto teen suicides motivated me to learn more about how our societies around the world view mental illness. This subsequently led me to analyze the digital world for mental illness related signals. The current iteration of my project consists of a generic data pipeline that analyzes the live twitter stream and can be configured to focus on any topic. Users can refine topic discovery by easily modifying the configuration without having any understanding of the pipeline internals.
+
 ###Architecture:
 ![Architecture Diagram](/capstone.png)
 
