@@ -4,8 +4,8 @@ Recent Palo Alto teen suicides motivated me to learn more about how our societie
 ###Architecture:
 ![Architecture Diagram](/capstone.png)
 
-###Query and UI
-* I wanted to understand the circumstances of the person tweeting about mental health so I decided to concentrate on hashtags. Currently, the UI, on hitting the update button; creates an updated wordcloud, from the information stored in the HBase, for the current hour.
+###Processing, Query and UI
+* I wanted to understand the circumstances of the person tweeting about mental health so I decided to concentrate on hashtags. The spark streaming layer outputs a word count of the hashtags and stores it in hbase. The UI layer creates an updated wordcloud, from the information stored in the HBase, for the current hour.
 For example if I hit update at 8:37 the UI will show me results for last 37 mins.
 * The picture below is the wordcloud for following keywords: "mental health,depression,anxiety,suicidal thoughts":
 ![UI](/screenshot1.png)
