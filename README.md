@@ -6,8 +6,6 @@
 For example if I hit update at 8:37 the UI will show me results for last 37 mins.
 * For keywords = "mental health,depression,anxiety,suicidal thoughts":
 ![UI](/screenshot1.png)
-* For keywords = "elections,america,politician,politics" :
-![UI](/screenshot2.png)
 
 ###Storage
 * HBase stores all the historic data so any further information for example how a particular hashtag trended could be derived from the data in it.
